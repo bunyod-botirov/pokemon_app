@@ -14,6 +14,7 @@ class InfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFFFFF),

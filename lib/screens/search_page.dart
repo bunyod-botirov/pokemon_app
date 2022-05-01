@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pokemon_app/constant/size_config.dart';
 import 'package:pokemon_app/model/pokemon_model.dart';
 import 'package:pokemon_app/screens/info_page.dart';
-import 'package:pokemon_app/service/pokemon_service.dart';
+import 'package:pokemon_app/service/pokemon_hive.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -18,7 +18,8 @@ class _SearchPageState extends State<SearchPage> {
   List<Pokemon> pokemons = [];
   @override
   void initState() {
-    ServicePokemon.getPokemons().then((value) => pokemons = value.pokemon!);
+    ModelPokemons pokedex = PokemonHive.pokemonsBox!.getAt(0);
+    pokemons = pokedex.pokemon!;
     super.initState();
   }
 

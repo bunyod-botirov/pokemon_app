@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_app/screens/home_page.dart';
+import 'package:pokemon_app/service/pokemon_hive.dart';
 
-void main() {
+Future<void> main() async {
+  await PokemonHive.initHive();
   runApp(const MyApp());
 }
 

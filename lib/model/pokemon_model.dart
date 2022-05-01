@@ -1,8 +1,14 @@
+import 'package:hive_flutter/hive_flutter.dart';
+
+part 'pokemon_model.g.dart';
+
+@HiveType(typeId: 0)
 class ModelPokemons {
   ModelPokemons({
     this.pokemon,
   });
 
+  @HiveField(0)
   List<Pokemon>? pokemon;
 
   factory ModelPokemons.fromJson(Map<String, dynamic> json) => ModelPokemons(
@@ -11,6 +17,7 @@ class ModelPokemons {
       );
 }
 
+@HiveType(typeId: 1)
 class Pokemon {
   Pokemon({
     this.id,
@@ -32,22 +39,39 @@ class Pokemon {
     this.prevEvolution,
   });
 
+  @HiveField(0)
   int? id;
+  @HiveField(1)
   String? num;
+  @HiveField(2)
   String? name;
+  @HiveField(3)
   String? img;
+  @HiveField(4)
   List<String>? type;
+  @HiveField(5)
   String? height;
+  @HiveField(6)
   String? weight;
+  @HiveField(7)
   String? candy;
+  @HiveField(8)
   int? candyCount;
+  @HiveField(9)
   String? egg;
+  @HiveField(10)
   double? spawnChance;
+  @HiveField(11)
   double? avgSpawns;
+  @HiveField(12)
   String? spawnTime;
+  @HiveField(13)
   List<double>? multipliers;
+  @HiveField(14)
   List<String>? weaknesses;
+  @HiveField(15)
   List<Evolution>? nextEvolution;
+  @HiveField(16)
   List<Evolution>? prevEvolution;
 
   factory Pokemon.fromJson(Map<String, dynamic> json) => Pokemon(
@@ -79,13 +103,15 @@ class Pokemon {
       );
 }
 
+@HiveType(typeId: 2)
 class Evolution {
   Evolution({
     this.num,
     this.name,
   });
-
+  @HiveField(0)
   String? num;
+  @HiveField(1)
   String? name;
 
   factory Evolution.fromJson(Map<String, dynamic> json) => Evolution(

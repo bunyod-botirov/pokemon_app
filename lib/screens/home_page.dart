@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pokemon_app/constant/size_config.dart';
-import 'package:pokemon_app/service/pokemon_service.dart';
 import 'package:pokemon_app/model/pokemon_model.dart';
 import 'package:pokemon_app/screens/info_page.dart';
 import 'package:pokemon_app/screens/search_page.dart';
+import 'package:pokemon_app/service/pokemon_hive.dart';
+import 'package:pokemon_app/service/pokemon_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -77,22 +78,18 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: FutureBuilder(
-        future: ServicePokemon.getPokemons(),
-        builder: (BuildContext context, AsyncSnapshot<ModelPokemons> snapshot) {
-          if (!snapshot.hasData) {
+      body: Builder(
+        builder: (BuildContext context) {
+          ServicePokemon.getPokemons();
+          if (PokemonHive.pokemonsBox!.isEmpty) {
             return const Center(
               child: CircularProgressIndicator(
                 color: Color(0xFFF993FB),
                 strokeWidth: 2,
               ),
             );
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text("Error! Something went wrong!"),
-            );
           } else {
-            List<Pokemon> data = snapshot.data!.pokemon!;
+            List<Pokemon> data = PokemonHive.pokemonsBox!.getAt(0).pokemon;
             return GridView.builder(
               physics: const BouncingScrollPhysics(),
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
